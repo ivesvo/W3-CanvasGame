@@ -1,0 +1,52 @@
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.left-side, .right-side{
+    font-size: 30px;
+    color: orangered;
+    height: 770px;
+    width: 100%;
+    margin: 15px;
+}
+.col-md-6 {
+    -webkit-box-flex: 0;
+}
+.btn {
+    margin-top: 10px;
+    
+    border-radius: 20px;
+}
+
+
+
+.username{
+    border-radius:20px;
+
+}
+
+.right-side{
+    
+    position: relative;
+}
+
+.right-side .canvas-container{
+    overflow: auto;
+    float: right;
+    display:block;
+    position: absolute;
+}
+
+.canvas-container{
+    
+    position: relative;
+
+}
+
+.canvas-container .canvas{
+    position: absolute;
+    
+}
+
+.
