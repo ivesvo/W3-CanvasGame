@@ -35,6 +35,8 @@ let backgroundMusic
 let monsterMusic;
 let endGameMusic; 
 
+let highScore = 0;
+let isPlaying = false;
 
 
 
@@ -362,6 +364,7 @@ var render = function () {
   }
   texter(`Seconds Remaining: ${SECONDS_PER_ROUND - elapsedTime}`, 20, 50);
   texter(`Brocolli: ${brocolli}`, 20, 80);
+  
 
   if (gameOver) {
     texter(`EYES HAVE LEFT THE CHAT`, 250,385);
@@ -401,6 +404,8 @@ function startGame(){
   setupKeyboardListeners();
   main();
   document.getElementById("click")
+  isPlaying = true;
+  brocolli = 0
 }
   
 
@@ -415,3 +420,12 @@ function enterName(){
   document.getElementById("nameArea").innerHTML = `${history}`
   
 }  
+
+
+function endGame(){
+  isPlaying=false;
+  if(brocolli > highScore){
+    highScore = brocolli;
+  }
+  document.getElementById("highscore").innerHTML = `${highScore}`
+}

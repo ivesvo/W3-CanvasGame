@@ -4,7 +4,7 @@ body{
 }
 
 .left-side, .right-side{
-    font-size: 30px;
+    font-size: 35px;
     color: orangered;
     height: 770px;
     width: 100%;
@@ -15,8 +15,8 @@ body{
 }
 .btn {
     margin-top: 10px;
-    
     border-radius: 20px;
+    font-size: 20px;
 }
 
 
@@ -48,5 +48,3 @@ body{
     position: absolute;
     
 }
-
-.
