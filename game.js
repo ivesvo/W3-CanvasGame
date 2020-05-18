@@ -26,8 +26,9 @@ canvas.style.top = "20px";
 canvas.style.position = "absolute";
 document.body.appendChild(canvas);
 
-let bgReady, heroReady, monsterReady, monster1Ready, monster2Ready, foodReady;
-let bgImage, heroImage, monsterImage, monster1Image, monster2Image, foodImage;
+let bgReady, heroReady, monsterReady, monster1Ready, monster2Ready, foodReady, addTimeReady;
+let bgImage, heroImage, monsterImage, monster1Image, monster2Image, foodImage, addTimeImage;
+let timer = false;
 let gameOver = false;
 let timeIsUp = false;
 let backgroundMusic
@@ -88,6 +89,12 @@ function loadImages() {
   };
   foodImage.src = "images/broccoli.png";
 
+  addTimeImage = new Image();
+  addTimeImage.onload = function () {
+    addTimeReady = true;
+  };
+  addTimeImage.src = "images/butterfly.png";
+
   backgroundMusic = new Audio("sound/bg.mp3");
   endGameMusic = new Audio ("sound/windowxp.mp3");
   pointMusic = new Audio ("sound/yoshi.mp3")
@@ -123,6 +130,8 @@ let monster2Y = Math.round(Math.random() * (canvas.width - 160));
 let foodX= Math.round(Math.random() * (canvas.width - 80));
 let foodY = Math.round(Math.random() * (canvas.width - 80));
 
+let addTimeX = Math.round(Math.random() * (canvas.width - 80));
+let addTimeY = Math.round(Math.random() * (canvas.width - 80));
 
 //speed and direction of monster
 let monsterSpeed = 1
@@ -254,15 +263,14 @@ let update = function () {
     foodY =  foodY = Math.floor(Math.random()*(canvas.height-80))
     brocolli++;
     pointMusic.play();
-    // document.getElementById("score").innerHTML = `${heroX}`;
-    }
-
+    // document.getElementById("score").innerHTML = `${heroX}`
+  }
   // if Eyes touch Monster -->  die
   if (
-    heroX + 10 <= (monsterX + 10)
-    && monsterX <= (heroX + 10)
-    && heroY + 10 <= (monsterY + 10)
-    && monsterY <= (heroY + 10)
+    heroX  <= (monsterX + 40)
+    && monsterX <= (heroX + 40)
+    && heroY  <= (monsterY + 40)
+    && monsterY <= (heroY + 40)
   ) {
     backgroundMusic.pause();
     endGameMusic.play();
@@ -284,10 +292,10 @@ let update = function () {
   }
 
   if (
-    heroX <= (monster2X + 36)
-    && monster2X <= (heroX + 36)
-    && heroY <= (monster2Y + 36)
-    && monster2Y <= (heroY + 6)
+    heroX <= (monster2X + 1 )
+    && monster2X <= (heroX + 1)
+    && heroY <= (monster2Y + 1)
+    && monster2Y <= (heroY + 1)
     && brocolli >=10
   ) {
     backgroundMusic.pause();
@@ -301,8 +309,11 @@ let update = function () {
     backgroundMusic.pause();
     endGameMusic.play();
     timeIsUp = true;
-
    }
+
+
+
+   
 };
 
 // colorful texts 
@@ -344,6 +355,7 @@ var render = function () {
   }
   if (monster2Ready && brocolli >=10) {
     ctx.drawImage(monster2Image, monster2X, monster2Y);
+    ctx.drawImage(addTimeImage, addTimeX, addTimeY);
   }
   if (foodReady){
     ctx.drawImage(foodImage, foodX, foodY);
@@ -365,9 +377,6 @@ var render = function () {
     
   }
 };
-
-
-
 /**
  * The main game loop. Most every game will have two distinct parts:
  * update (updates the state of the game, in this case our hero and monster)
